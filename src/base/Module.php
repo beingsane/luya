@@ -6,13 +6,14 @@ use yii;
 use Exception;
 use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
+use yii\base\BootstrapInterface;
 
 /**
  * All Luya modules must extend on this base module class.
  * 
  * @author nadar
  */
-abstract class Module extends \yii\base\Module
+abstract class Module extends \yii\base\Module implements BootstrapInterface
 {
     /**
      * @var array Contains the apis for each module to provided them in the admin module. They represents 
@@ -109,6 +110,25 @@ abstract class Module extends \yii\base\Module
      */
     public $translations = [];
 
+    public function bootstrap($app)
+    {
+    	$app->getUrlManager()->addRules($this->urlRules);
+    	Yii::setAlias('@'.$this->id, $this->getBasePath());
+    	foreach ($this->registerComponents() as $componentId => $definition) {
+    		if (!$app->has($componentId)) {
+    			Yii::trace('Register component ' . $componentId, __METHOD__);
+    			$app->set($componentId, $definition);
+    		}
+    	}
+    	
+    	$this->luyaBootstrap($app);
+    }
+    
+    public function luyaBootstrap($app)
+    {
+    	
+    }
+    
     /**
      * The Luya-Module initializer is looking for defined requiredComponents.
      * 

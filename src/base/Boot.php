@@ -115,7 +115,7 @@ abstract class Boot
             }
         }
         $this->includeYii();
-        $this->app = new ConsoleApplication(ArrayHelper::merge(['bootstrap' => ['luya\console\Bootstrap']], $config));
+        $this->app = new ConsoleApplication($config);
         if (!$this->mockOnly) {
             exit($this->app->run());
         }
@@ -130,7 +130,7 @@ abstract class Boot
     {
         $config = $this->getConfigArray();
         $this->includeYii();
-        $this->app = new WebApplication(ArrayHelper::merge(['bootstrap' => ['luya\web\Bootstrap']], $config));
+        $this->app = new WebApplication($config);
         if (!$this->mockOnly) {
             return $this->app->run();
         }

@@ -4,6 +4,9 @@ namespace luya\components;
 
 use Yii;
 
+trigger_error('class does not exists anymore in beta6');
+exit;
+
 class UrlRule extends \luya\web\UrlRule
 {
     private $_defaultClassName = null;

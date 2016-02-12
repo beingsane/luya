@@ -21,9 +21,11 @@ class Module extends \luya\base\Module
      *
      * @var array
      */
+    /*
     public $urlRules = [
         ['class' => 'luya\components\UrlRule', 'position' => UrlRule::POSITION_LUYA],
     ];
+    */
     
     /**
      * @var array Register all luya core component language messages.

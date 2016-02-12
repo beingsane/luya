@@ -3,7 +3,7 @@
 namespace admin;
 
 use luya\Module as Luya;
-use luya\components\UrlRule;
+use luya\web\UrlRule;
 
 class Module extends \admin\base\Module
 {

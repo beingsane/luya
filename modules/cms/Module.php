@@ -2,6 +2,7 @@
 
 namespace cms;
 
+use yii\base\Application;
 use luya\web\UrlRule;
 
 /**
@@ -50,5 +51,15 @@ class Module extends \luya\base\Module
                 'class' => 'cms\menu\Container',
             ],
         ];
+    }
+    
+    public function luyaBootstrap($app)
+    {
+    	$app->on(Application::EVENT_BEFORE_REQUEST, function($event) {
+    		$event->sender->urlManager->addRules([
+    				['class' => 'cms\components\RouteBehaviorUrlRule'],
+    				['class' => 'cms\components\CatchAllUrlRule'],
+    		]);
+    	});
     }
 }
