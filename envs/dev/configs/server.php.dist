@@ -18,7 +18,9 @@ $config = [
         ],
         'cmsadmin' => 'cmsadmin\Module',
         'admin' => 'admin\Module',
-        'news' => 'news\Module',
+			/*
+			'news' => 'news\Module',
+			
 	    'newsadmin' => 'newsadmin\Module',
 	    'crawler' => [
 	        'class' => 'crawler\Module',
@@ -26,7 +28,16 @@ $config = [
 	    ],
 	    'crawleradmin' => 'crawleradmin\Module',
 	    'exporter' => 'exporter\Module',
+	    */
+			'debug' => 'yii\debug\Module',
     ],
+		'bootstrap' => ['debug', 'cms', 'luya', 'admin', 'cmsadmin'],
+		/*
+	'bootstrap' => [
+			'admin', 'cms', 'luya', 'debug',
+		//'luya', 'admin', 'cms', 'cmsadmin',	'debug',
+	],
+	*/
     'components' => [
     	'mail' => [
     	],
@@ -35,9 +46,9 @@ $config = [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=DB_NAME',
-            'username' => '',
-            'password' => '',
+            'dsn' => 'mysql:host=localhost;dbname=luya;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
+            'username' => 'root',
+            'password' => 'root',
             'charset' => 'utf8'
         ]
     ]
