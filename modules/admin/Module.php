@@ -2,8 +2,10 @@
 
 namespace admin;
 
+use Yii;
 use luya\Module as Luya;
 use luya\web\UrlRule;
+use yii\base\Application;
 
 class Module extends \admin\base\Module
 {
@@ -39,13 +41,16 @@ class Module extends \admin\base\Module
         'api-admin-tag' => 'admin\apis\TagController',
     ];
 
+    /*
     public $urlRules = [
         ['class' => 'admin\components\UrlRule'],
         ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
         ['pattern' => 'admin', 'route' => 'admin/default/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
         ['pattern' => 'admin/login', 'route' => 'admin/login/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
     ];
+    */
 
+    
     public $assets = [
         'admin\assets\Main',
     ];
@@ -58,6 +63,30 @@ class Module extends \admin\base\Module
     public $moduleMenus = [];
 
     private $_jsTranslations = [];
+    
+    public function luyaBootstrap($app)
+    {
+    	if (!$app->request->isConsoleRequest) {
+    		$app->on(Application::EVENT_BEFORE_REQUEST, function($event) {
+    			$controllers = [];
+    			$menus = [];
+    			foreach($event->sender->getModules() as $id => $object) {
+    				$module = $event->sender->getModule($id);
+    				if ($module instanceof \admin\base\Module) {
+    					Yii::trace('add alias '. $id, __METHOD__);
+    					Yii::setAlias('@'.$id, $module->getBasePath());
+    					$this->assets = array_merge($this->assets, $module->assets);
+    					$controllers = array_merge($controllers, $module->apis);
+    					$menus = array_merge($menus, $module->getMenu());
+    				}
+    			}
+    			
+    			$this->controllerMap = $controllers;
+    			$this->moduleMenus = $menus;
+    			
+    		});
+    	}
+    }
     
     public function getJsTranslations()
     {
@@ -105,9 +134,6 @@ class Module extends \admin\base\Module
             'auth' => [
                 'class' => \admin\components\Auth::className(),
             ],
-            'storagecontainer' => [ // @todo remove alias
-                'class' => \admin\components\StorageContainer::className(),
-            ]
         ];
     }
 

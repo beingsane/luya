@@ -52,6 +52,7 @@ class Module extends \luya\base\Module
      */
     public static function t($category, $message, array $params = [])
     {
+    	return $message;
         return Yii::t('luya/' . $category, $message, $params, Yii::$app->luyaLanguage);
     }
 }

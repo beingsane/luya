@@ -48,6 +48,15 @@ class Module extends \luya\base\Module
      * The above example will override the api-admin-user ngrest config with your project specific config.
      */
     public $ngrestConfigLinker = [];
+    
+    /**
+     * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g.
+     *
+     * ```php
+     * public $assets = ['\app\assets\TestAsset'];
+     * ```
+     */
+    public $assets = [];
 
     private $_menu = [];
 

@@ -75,6 +75,7 @@ class Module extends \admin\base\Module
     
     public static function t($message, array $params = [])
     {
+    	return $message;
         return \luya\Module::t('cmsadmin', $message, $params);
     }
 }

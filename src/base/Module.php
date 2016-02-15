@@ -64,18 +64,9 @@ abstract class Module extends \yii\base\Module implements BootstrapInterface
     public $controllerUseModuleViewPath = null;
 
     /**
-     * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g. 
-     * 
-     * ```php
-     * public $assets = ['\app\assets\TestAsset'];
-     * ```
-     */
-    public $assets = [];
-
-    /**
      * @var string if this/the module is included via another module (parent module), the parent module will write its 
-     *             name inside the child modules $context variable. For example the cms includes the news module, the context variable
-     *             of news would have the value "cms".
+     * name inside the child modules $context variable. For example the cms includes the news module, the context variable
+     * of news would have the value "cms".
      */
     public $context = null;
 
@@ -145,7 +136,7 @@ abstract class Module extends \yii\base\Module implements BootstrapInterface
                 throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-        $this->registerTranslations();
+        //$this->registerTranslations();
     }
     
     /**

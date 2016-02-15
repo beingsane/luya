@@ -18,16 +18,17 @@ abstract class Controller extends \yii\web\Controller
      * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
      *            all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
      */
-    public $skipModuleAssets = [];
+    //public $skipModuleAssets = [];
 
     /**
      * @var array Defined assets where should be assigned into the view for this controller. The class name of the Asset (e.g. "\admin\asset\BowerAsset")
      */
-    public $assets = [];
+    //public $assets = [];
 
     /**
      * Yii initializer. Find assets to register, and add them into the view if they are not ignore by $skipModuleAssets.
      */
+    /*
     public function init()
     {
         // call parent
@@ -44,6 +45,7 @@ abstract class Controller extends \yii\web\Controller
             $this->registerAsset($class);
         }
     }
+    */
 
     /**
      * Helper method for registring an asset into the view.

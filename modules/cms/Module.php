@@ -56,10 +56,12 @@ class Module extends \luya\base\Module
     public function luyaBootstrap($app)
     {
     	$app->on(Application::EVENT_BEFORE_REQUEST, function($event) {
-    		$event->sender->urlManager->addRules([
-    				['class' => 'cms\components\RouteBehaviorUrlRule'],
-    				['class' => 'cms\components\CatchAllUrlRule'],
-    		]);
+    		if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin()) {
+	    		$event->sender->urlManager->addRules([
+	    				['class' => 'cms\components\RouteBehaviorUrlRule'],
+	    				['class' => 'cms\components\CatchAllUrlRule'],
+	    		]);
+    		}
     	});
     }
 }

@@ -11,6 +11,15 @@ class DefaultController extends \admin\base\Controller
 {
     public $disablePermissionCheck = true;
 
+    public function init()
+    {
+    	parent::init();
+    	
+    	foreach ($this->module->assets as $class) {
+    		$this->registerAsset($class);
+    	}
+    }
+    
     public function actionIndex()
     {
         // register auth token

@@ -22,6 +22,6 @@ class CatchAllUrlRule extends \yii\web\UrlRule
         }
         
         // return the custom route
-        return ['/cms/default/index', ['alias' => $request->pathInfo]];
+        return ['/cms/default/index', ['path' => $request->pathInfo]];
     }
 }
