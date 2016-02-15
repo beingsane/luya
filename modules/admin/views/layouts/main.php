@@ -33,7 +33,7 @@ $this->beginPage()
     <?php $this->head(); ?>
 </head>
 
-<body ng-cloak>
+<body style="padding-top: 54px;" ng-cloak>
     <?php $this->beginBody(); ?>
 
     <!-- .navbar -->
@@ -135,9 +135,13 @@ $this->beginPage()
             </tbody>
         </table>
     </div>
+    <!-- /useronline-container -->
 
     <!-- /navbar container -->
 
+    <!-- LUYA CONTAINER -->
+    <div class="luya-container module-{{currentItem.moduleId}}" ui-view></div>
+    <!-- /LUYA CONTAINER -->
 
     <?php $this->endBody() ?>
 </body>
