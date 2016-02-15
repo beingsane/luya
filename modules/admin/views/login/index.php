@@ -4,7 +4,7 @@
 
         <div class="col-md-6 col-md-offset-3">
 
-            <div class="jumbotron m-t-3 p-t-2 p-b-2 o-b-inverse-6">
+            <div class="jumbotron m-t-3 p-t-2 p-b-2 o-b-inverse-6 login-animation">
                 <h1><?php echo \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></h1>
                 <p class="lead">Please login with your credentials below.</p>
                 <hr class="m-y-2">
@@ -30,13 +30,14 @@
                             <input class="form-control" id="password" name="login[password]" type="password" placeholder="<?php echo \admin\Module::t('login_password'); ?>">
                         </div>
                     </div>
-                    <button class="btn btn-lg btn-success pull-right" type="submit">
+                    <button class="btn btn-lg btn-success pull-right login-animation__button" type="submit">
                         <span class="submit-icon">
                             <?php echo \admin\Module::t('login_btn_login'); ?>
                             <i class="fa fa-sign-in"></i>
                         </span>
                         <i class="fa fa-cog fa-spin submit-spinner" style="display: none;"></i>
                     </button>
+                    <i class="fa fa-check login-animation__success-icon"></i>
                 </form>
                 <!-- /Normal login -->
 

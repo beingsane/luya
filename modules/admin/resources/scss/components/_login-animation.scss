@@ -1,0 +1,51 @@
+.login-animation {
+    overflow: hidden;
+}
+
+.login-animation__button {
+    position: relative;
+    transition: 0.5s ease-in-out border-radius,
+                0.5s 1s ease transform;
+    z-index: 100;
+    outline: 0;
+
+    &:hover, &:focus {
+        outline: 0;
+    }
+
+    i, span {
+        transition: 0.25s ease opacity;
+    }
+
+    .login-animation--active & {
+        border-radius: 50%;
+        height: 52px;
+        transform: scale(100);
+        width: 52px;
+
+        i, span {
+            opacity: 0;
+        }
+
+        &:hover {
+            background-color: $brand-success;
+            cursor: default;
+        }
+    }
+}
+
+.login-animation__success-icon {
+    position: absolute;
+    font-size: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0;
+    z-index: -1;
+    transition: 2s 0.5s ease opacity;
+
+    .login-animation--active & {
+        opacity: 1;
+        z-index: 200;
+    }
+}

@@ -31,10 +31,10 @@ var observeLogin = function(form, url, secureUrl) {
 				}
 				
 				if (refresh) {
-                    $('#secureForm').hide();
-                    $('#loginForm').hide();
-                    $('#success').show();
-                    location.reload();
+                    $('.login-animation').addClass('login-animation--active');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
 				}
 			},
 			dataType: "json"

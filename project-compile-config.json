@@ -4,8 +4,8 @@
     "source": {
         "styleguideConfig": "resources/scss/styleguide.lsg",
         "styles": [
-            "modules/admin/resources/scss/admin.scss",
-            "modules/cmsadmin/resources/scss/cmsadmin.scss"
+            "modules/admin/resources/scss/**/*.scss",
+            "modules/cmsadmin/resources/scss/**/*.scss"
         ],
         "scripts": [
             "modules/admin/resources/js-source/**/*.js",
