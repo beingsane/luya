@@ -1,0 +1,70 @@
+/*
+@styleguide
+
+# Helpers
+*/
+
+/*
+@styleguide
+
+## Opacity
+
+This classes can be used to set the opacity of a whole element, or just the background-color.
+They are written in "bootstrap-4-like" style.
+
+There are ten steps. Each one represents x * 10%.
+
+*Whole element*
+```
+.o-[1-10]
+```
+
+*Background Color*
+```
+.o-b-primary-[1-10]
+.o-b-success-[1-10]
+.o-b-info-[1-10]
+.o-b-warning-[1-10]
+.o-b-danger-[1-10]
+.o-b-inverse-[1-10]
+```
+*/
+
+$steps: (
+    1: 10%,
+    2: 20%,
+    3: 30%,
+    4: 40%,
+    5: 50%,
+    6: 60%,
+    7: 70%,
+    8: 80%,
+    9: 90%,
+    10: 100%
+);
+
+$colors: (
+    primary:      $brand-primary,
+    success:      $brand-success,
+    info:         $brand-info,
+    warning:      $brand-warning,
+    danger:       $brand-danger,
+    inverse:      $gray-dark,
+);
+
+@each $stepNumber, $stepPercent in $steps {
+
+    .o-#{$stepNumber} {
+        opacity: $stepPercent;
+    }
+
+    @each $colorName, $colorCode in $colors {
+        .o-b-#{$colorName}-#{$stepNumber} {
+            background-color: rgba($colorCode, 1 - ($stepPercent / 100%));
+            @if $colorName == "inverse" {
+                color: #fff;
+            }
+        }
+    }
+
+}

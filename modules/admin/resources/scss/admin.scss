@@ -1,84 +1,78 @@
-/**
- * Materialize CSS
- * http://materializecss.com/
- */
+// ==================================================
+// FONT-AWESOME
+@import "libs/font-awesome/font-awesome";
 
-@import "materialize/materialize";
+// ==================================================
+// BOOTSTRAP
+// Core variables and mixins
+@import "libs/bootstrap-4-alpha2/variables";
+@import "libs/bootstrap-4-alpha2/mixins";
 
-/**
- * Basic styles
- * 		variables:				Variables to use later
- * 		base: 					HTML & Body tags
- * 		typography: 			Typography styles
- * 		materialize-overwrite: 	Overwrite styles from Materialize that we don't need
- */
+// ==================================================
+// PROJECT
+// Overwrites the default bootstrap variables
+// and adds new ones
 @import "base/variables";
-@import "base/base";
-@import "base/typography";
-@import "base/materialize-overwrite";
 
-/**
- * Helpers
- */
-@import "helpers/clearfix";
+// ==================================================
+// BOOTSTRAP
+// Core variables and mixins
+@import "libs/bootstrap-4-alpha2/normalize";
+@import "libs/bootstrap-4-alpha2/print";
 
-/**
- * Components
- * 		btn:					Extends the default Materialize behavior with some useful classes
- * 		luya-container:			Size and position of the Sidebar and the Main container (luya-container__sidebar, luya-container__main)
- * 		modal:					Sizes and styling for modals
- * 		navbar:					Some Improvements to the normal materialize navbar
- * 		navbar:					Default styles for submenu (left side)
- *		toolbar:				Defines the .toolbar background and proportions
- */
+// ==================================================
+// BOOTSTRAP
+// Core CSS
+@import "libs/bootstrap-4-alpha2/reboot";
+@import "libs/bootstrap-4-alpha2/type";
+@import "libs/bootstrap-4-alpha2/images";
+@import "libs/bootstrap-4-alpha2/code";
+@import "libs/bootstrap-4-alpha2/grid";
+@import "libs/bootstrap-4-alpha2/tables";
+@import "libs/bootstrap-4-alpha2/forms";
+@import "libs/bootstrap-4-alpha2/buttons";
 
-@import "components/material-icons";
+// ==================================================
+// BOOTSTRAP
+// Components
+@import "libs/bootstrap-4-alpha2/animation";
+@import "libs/bootstrap-4-alpha2/dropdown";
+@import "libs/bootstrap-4-alpha2/button-group";
+@import "libs/bootstrap-4-alpha2/input-group";
+@import "libs/bootstrap-4-alpha2/custom-forms";
+@import "libs/bootstrap-4-alpha2/nav";
+@import "libs/bootstrap-4-alpha2/navbar";
+@import "libs/bootstrap-4-alpha2/card";
+@import "libs/bootstrap-4-alpha2/breadcrumb";
+@import "libs/bootstrap-4-alpha2/pagination";
+@import "libs/bootstrap-4-alpha2/pager";
+@import "libs/bootstrap-4-alpha2/labels";
+@import "libs/bootstrap-4-alpha2/jumbotron";
+@import "libs/bootstrap-4-alpha2/alert";
+@import "libs/bootstrap-4-alpha2/progress";
+@import "libs/bootstrap-4-alpha2/media";
+@import "libs/bootstrap-4-alpha2/list-group";
+@import "libs/bootstrap-4-alpha2/responsive-embed";
+@import "libs/bootstrap-4-alpha2/close";
 
-@import "components/alert";
-@import "components/breadcrumb";
-@import "components/btn";
-@import "components/crud";
-@import "components/filearray";
-@import "components/filemanager";
-@import "components/fileupload";
-@import "components/flag";
-@import "components/floating-form";
-@import "components/floating-button-label";
-@import "components/form";
-@import "components/help";
-@import "components/i18n";
-@import "components/imagearray";
-@import "components/imageupload";
-@import "components/input";
-@import "components/list";
-@import "components/loading-bar";
-@import "components/loading-indicator";
-@import "components/loading-overlay";
-@import "components/log";
-@import "components/luya-container";
-@import "components/menu-dropdown";
-@import "components/modal";
-@import "components/navbar";
-@import "components/ng-wig";
-@import "components/search-box";
-@import "components/sidebar";
-@import "components/submenu";
-@import "components/switch";
-@import "components/table";
-@import "components/toolbar";
-@import "components/useronline";
-@import "components/waves";
-@import "components/langswitch";
-@import "components/tabs";
-@import "components/toasts";
-@import "components/debug-container";
-@import "components/zaa-table";
+// ==================================================
+// BOOTSTRAP
+// Components w/ JavaScript
+@import "libs/bootstrap-4-alpha2/modal";
+@import "libs/bootstrap-4-alpha2/tooltip";
+@import "libs/bootstrap-4-alpha2/popover";
+@import "libs/bootstrap-4-alpha2/carousel";
 
-// Curently disabled
-// @import "components/user-menu";
+// ==================================================
+// BOOTSTRAP
+// Utility classes
+@import "libs/bootstrap-4-alpha2/utilities";
+@import "libs/bootstrap-4-alpha2/utilities-background";
+@import "libs/bootstrap-4-alpha2/utilities-spacing";
+@import "libs/bootstrap-4-alpha2/utilities-responsive";
 
-/**
- * Layouts
- *		luya-container:			Dimensiions and positionng of the luya-container
- */
-@import "layouts/luya-container";
+// ==================================================
+// PROJECT
+// Components
+
+@import "components/helpers";

@@ -1,14 +1,14 @@
 var observeLogin = function(form, url, secureUrl) {
 	$(form).submit(function(e) {
         $('#errorsContainer').hide();
-		$('.spinner').show(); $('.submit-icon').hide();
+		$('.submit-spinner').show(); $('.submit-icon').hide();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.spinner').hide(); $('.submit-icon').show();
+                $('.submit-spinner').hide(); $('.submit-icon').show();
 				var refresh = response['refresh'];
 				var errors = response['errors'];
 				var enterSecureToken = response['enterSecureToken'];
@@ -43,14 +43,14 @@ var observeLogin = function(form, url, secureUrl) {
 	
 	$('#secureForm').submit(function(e) {
 		$('#errorsContainer').hide();
-        $('.spinner').show(); $('.submit-icon').hide();
+        $('.submit-spinner').show(); $('.submit-icon').hide();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: secureUrl,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.spinner').hide(); $('.submit-icon').show();
+                $('.submit-spinner').hide(); $('.submit-icon').show();
 				var refresh = response['refresh'];
 				
 				if (response['errors']) {
@@ -70,7 +70,7 @@ var observeLogin = function(form, url, secureUrl) {
 	});
 	
 	$('#abortToken').click(function(e) {
-        $('.spinner').hide(); $('.submit-icon').show();
+        $('.submit-spinner').hide(); $('.submit-icon').show();
 		$('#errorsContainer').hide();
 		$('#secureForm').hide();
 		$('#loginForm').show();

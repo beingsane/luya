@@ -28,5 +28,4 @@ scripts/.subsplit
 /build/
 
 ### Compile
-scripts/.pid.*
-scripts/.sass_log
+node_modules/

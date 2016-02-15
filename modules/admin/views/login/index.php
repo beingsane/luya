@@ -1,90 +1,73 @@
-<div class="container login">
-    <div class="row">
-        <div class="col s12 offset-s0 m6 offset-m3">
+<div class="container">
 
-            <div class="card hidden" id="success">
-                <div class="login__success">
-                    <i class="material-icons login__success-icon green-text">check_circle</i>
-                </div>
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="jumbotron m-t-3 p-t-2 p-b-2 o-b-inverse-6">
+                <h1><?php echo \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></h1>
+                <p class="lead">Please login with your credentials below.</p>
+                <hr class="m-y-2">
+
+                <!-- Normal login -->
+                <form class="form clearfix" method="post" id="loginForm">
+                    <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->csrfToken; ?>" />
+                    <div class="form-group">
+                        <label class="sr-only" for="email"><?php echo \admin\Module::t('login_mail'); ?></label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <input class="form-control" id="email" name="login[email]" type="email" placeholder="<?php echo \admin\Module::t('login_mail'); ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="password"><?php echo \admin\Module::t('login_password'); ?></label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-key"></i>
+                            </div>
+                            <input class="form-control" id="password" name="login[password]" type="password" placeholder="<?php echo \admin\Module::t('login_password'); ?>">
+                        </div>
+                    </div>
+                    <button class="btn btn-lg btn-success pull-right" type="submit">
+                        <span class="submit-icon">
+                            <?php echo \admin\Module::t('login_btn_login'); ?>
+                            <i class="fa fa-sign-in"></i>
+                        </span>
+                        <i class="fa fa-cog fa-spin submit-spinner" style="display: none;"></i>
+                    </button>
+                </form>
+                <!-- /Normal login -->
+
+                <!-- /Secure form -->
+                <form class="form clearfix" method="post" id="secureForm" style="display: none;">
+                    <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->csrfToken; ?>" />
+                    <div class="form-group">
+                        <label class="sr-only" for="secure_form"><?php echo \admin\Module::t('login_securetoken'); ?></label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-key"></i>
+                            </div>
+                            <input class="form-control" name="secure_token" id="secure_token" type="text" placeholder="<?php echo \admin\Module::t('login_securetoken'); ?>">
+                        </div>
+                        <small><?php echo \admin\Module::t('login_securetoken_info'); ?></small>
+                    </div>
+                    <button class="btn btn-lg btn-success pull-right" type="submit">
+                        <span class="submit-icon">
+                            <?php echo \admin\Module::t('button_send'); ?>
+                            <i class="fa fa-sign-in"></i>
+                        </span>
+                        <i class="fa fa-cog fa-spin submit-spinner" style="display: none;"></i>
+                    </button>
+                </form>
+                <!-- /Secure form -->
+
             </div>
 
-            <!-- Normal login -->
-            <form class="card" method="post" id="loginForm">
-                <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->csrfToken; ?>" />
-                <div class="card-content clearfix">
-                    <span class="card-title black-text"><?php echo \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
-
-                    <br />
-                    <br />
-
-                    <div class="row">
-                        <div class="input input--text input--vertical col s12">
-                            <label class="input__label" for="email"><?php echo \admin\Module::t('login_mail'); ?></label>
-                            <div class="input__field-wrapper">
-                                <input class="input__field" id="email" name="login[email]" type="email" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input input--text input--vertical col s12">
-                            <label class="input__label" for="password"><?php echo \admin\Module::t('login_password'); ?></label>
-                            <div class="input__field-wrapper">
-                                <input class="input__field" id="password" name="login[password]" type="password" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <br />
-
-                </div>
-
-                <div class="card-action">
-                    <button class="btn right color green white-text" type="submit">
-                        <?php echo \admin\Module::t('login_btn_login'); ?> <i class="material-icons right submit-icon">keyboard_arrow_right</i>
-                        <div class="preloader-wrapper login__spinner right small active hidden spinner"><div class="spinner-layer"><div class="circle-clipper left"><div class="circle"></div></div></div></div>
-                    </button>
-                    <div class="clearfix"></div>
-                </div>
-            </form>
-            <!-- /Normal login -->
-
-            <!-- Token -->
-            <form class="card hidden" method="post" id="secureForm">
-                <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->csrfToken; ?>" />
-                <div class="card-content clearfix">
-                    <span class="card-title black-text"><?php echo \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
-
-                    <br />
-                    <br />
-
-                    <div class="row">
-                        <div class="input input--text input--vertical col s12">
-                            <label class="input__label" for="secure_token"><?php echo \admin\Module::t('login_securetoken'); ?></label>
-                            <div class="input__field-wrapper">
-                                <input class="input__field" name="secure_token" id="secure_token" type="text" />
-                                <small><?php echo \admin\Module::t('login_securetoken_info'); ?></small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br />
-
-                </div>
-
-                <div class="card-action">
-                    <button class="btn right green white-text" type="submit">
-                        <?php echo \admin\Module::t('button_send'); ?> <i class="material-icons right submit-icon">keyboard_arrow_right</i>
-                        <div class="preloader-wrapper login__spinner right small active hidden spinner"><div class="spinner-layer"><div class="circle-clipper left"><div class="circle"></div></div></div></div>
-                    </button>
-                    <button class="btn left red white-text" type="button" id="abortToken"><i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?></button>
-                    <div class="clearfix"></div>
-                </div>
-            </form>
-            <!-- /Token -->
-
-            <div class="card-panel red lighten-1 white-text" id="errorsContainer" style="display:none;"></div>
+            <div id="errorsContainer" class="alert alert-danger" role="alert" style="display:none;"></div>
 
         </div>
     </div>
+
 </div>

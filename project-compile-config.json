@@ -1,0 +1,20 @@
+{
+    "baseFontSize": 16,
+
+    "source": {
+        "styleguideConfig": "resources/scss/styleguide.lsg",
+        "styles": [
+            "modules/admin/resources/scss/admin.scss",
+            "modules/cmsadmin/resources/scss/cmsadmin.scss"
+        ],
+        "scripts": [
+            "modules/admin/resources/js-source/**/*.js",
+            "modules/cmsadmin/resources/js-source/**/*.js"
+        ]
+    },
+
+    "dest": {
+        "styles": "../css/",
+        "scripts": "../js/"
+    }
+}
