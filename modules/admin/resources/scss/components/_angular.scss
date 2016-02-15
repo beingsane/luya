@@ -6,8 +6,31 @@
 Some small fixes to improve usability with angular.
 
 Cursor pointer for elements with `ng-click`.
+
+Div with `ng-click`, hover effect based on class.
 */
 
 *[ng-click] {
     cursor: pointer;
+}
+
+div[ng-click] {
+    &:hover {
+        background-color: $gray-lighter;
+    }
+    &.bg-primary:hover {
+        background-color: lighten($brand-primary, 10);
+    }
+    &.bg-info:hover {
+        background-color: lighten($brand-info, 10);
+    }
+    &.bg-success:hover {
+        background-color: lighten($brand-success, 10);
+    }
+    &.bg-danger:hover {
+        background-color: lighten($brand-danger, 10);
+    }
+    &.bg-warning:hover {
+        background-color: lighten($brand-warning, 10);
+    }
 }

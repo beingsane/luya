@@ -20,36 +20,106 @@
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">
 	<!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
 	<div style="visibility:hidden;" ui-view></div>
-    <div>
 
-        <div class="tabs">
-            <ul>
-                <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">menu</i> <?php echo \admin\Module::t('ngrest_crud_btn_list'); ?></a>
-                </li>
+    <!-- tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" ng-class="{'active' : crudSwitchType==0}" ng-click="switchTo(0)">
+                <i class="fa fa-list"></i> <?php echo \admin\Module::t('ngrest_crud_btn_list'); ?>
+            </a>
+        </li>
 
-                <?php if ($canCreate && $config->getPointer('create')): ?>
-                    <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?php echo \admin\Module::t('ngrest_crud_btn_add'); ?></a>
-                    </li>
-                <?php endif; ?>
-                
-                <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> <?php echo \admin\Module::t('ngrest_crud_btn_close'); ?></a>
-                </li>
-            </ul>
+        <?php if ($canCreate && $config->getPointer('create')): ?>
+            <li class="nav-item">
+                <a class="nav-link" ng-class="{'active' : crudSwitchType==1}" ng-click="switchTo(1)">
+                    <i class="fa fa-plus"></i> <?php echo \admin\Module::t('ngrest_crud_btn_add'); ?>
+                </a>
+            </li>
+        <?php endif; ?>
+
+        <li class="nav-item">
+            <a class="nav-link" ng-class="{'disabled' : crudSwitchType!=2, 'active' : crudSwitchType==2}" ng-click="switchTo(2)">
+                <span><i class="fa fa-pencil"></i> Edit</span>
+            </a>
+        </li>
+    </ul>
+    <!-- /tabs -->
+
+    <!-- search -->
+    <div class="row">
+        <div class="col-md-12 m-t-1">
+
+            <div class="form-group">
+                <label class="sr-only" for="search"><?php echo \admin\Module::t('ngrest_crud_search_text'); ?></label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <input type="search" class="form-control" id="search" ng-model="searchString" ng-change="evalSearchString()" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>">
+                </div>
+            </div>
+
         </div>
+    </div>
+    <!-- /search -->
 
-        <div class="langswitch crud__langswitch" ng-if="crudSwitchType!==0">
+    <!--<div class="langswitch crud__langswitch" ng-if="crudSwitchType!==0">
             <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'langswitch__item--active' : AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ] ng-binding ng-scope">
                 <span class="flag flag--{{lang.short_code}}">
                     <span class="flag__fallback">{{lang.name}}</span>
                 </span>
             </a>
+        </div>-->
+
+    <!-- crud-list -->
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-striped table-align-middle">
+                <thead class="thead-inverse">
+                    <tr>
+                        <?php foreach ($config->getPointer('list') as $item): ?>
+                            <th>
+                                <?= $item['alias'] == 'ID' ? '#' : $item['alias']; ?>
+                                <i class="fa fa-angle-up" ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'text-success' : isOrderBy('+<?php echo $item['name']; ?>') }"></i>
+                                <i class="fa fa-angle-down" ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'text-success' : isOrderBy('-<?php echo $item['name']; ?>') }"></i>
+                            </th>
+                        <?php endforeach; ?>
+                        <?php if (count($this->context->getButtons()) > 0): ?>
+                            <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?php echo \admin\Module::t('ngrest_crud_rows_count'); ?></span></th>
+                        <?php endif; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, item) in data.list | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
+                        <?php foreach ($config->getPointer('list') as $item): ?>
+                            <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
+                                <td><?php echo $element['html']; ?></td>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                        <?php if (count($this->context->getButtons()) > 0): ?>
+                            <td style="text-align:right;">
+                                <?php foreach ($this->context->getButtons() as $item): ?>
+                                    <button type="button" class="btn btn-<?= isset($item['color']) ? $item['color'] : "primary"; ?>-outline" ng-click="<?php echo $item['ngClick']; ?>">
+                                        <?php echo $item['label']; ?><i class="fa fa-<?php echo $item['icon']; ?>"></i>
+                                    </button>
+                                <?php endforeach; ?>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-show="data.list.length == 0" class="alert alert--info"><?php echo \admin\Module::t('ngrest_crud_empty_row'); ?></div>
+
         </div>
+    </div>
+    <!-- /crud-list -->
+
+
+    <!--<div>
         
         <!-- LIST -->
-        <div class="card-panel" ng-show="crudSwitchType==0">
+    <!--<div class="card-panel" ng-show="crudSwitchType==0">
             
             
             <div style="margin-bottom:30px;">
@@ -99,14 +169,14 @@
             <div ng-show="data.list.length == 0" class="alert alert--info"><?php echo \admin\Module::t('ngrest_crud_empty_row'); ?></div>
         </div>
         <!-- /LIST -->
-    
-        <div class="card-panel" ng-show="crudSwitchType==1" zaa-esc="closeCreate()">
+
+    <!--<div class="card-panel" ng-show="crudSwitchType==1" zaa-esc="closeCreate()">
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
 
                     <!-- MODAL CONTENT -->
-                    <div class="modal__content">
+    <!--<div class="modal__content">
                         
                         <?php foreach ($config->getPointer('create') as $k => $item): ?>
                             <div class="row">
@@ -147,7 +217,7 @@
         <div class="card-panel" ng-show="crudSwitchType==2" zaa-esc="closeUpdate()">
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
-                    <!-- MODAL CONTENT -->
+                    <!-- MODAL CONTENT --><!--
                     <div class="modal__content">
                         <?php foreach ($config->getPointer('update') as $k => $item): ?>
                             <div class="row">
@@ -165,7 +235,7 @@
                     </div>
                     <!-- /MODAL CONTENT -->
 
-                    <!-- MODAL FOOTER -->
+                    <!-- MODAL FOOTER --><!--
                     <div class="modal__footer">
                         <div class="row">
                             <div class="col s12">
@@ -180,14 +250,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /MODAL FOOTER -->
+                    <!-- /MODAL FOOTER --><!--
                 </form>
             <?php endif; ?>
         </div>
 
     </div>
 
-    <!-- activeWindow MODAL -->
+    <!-- activeWindow MODAL --><!--
     <div ng-show="activeWindowModal" class="modal__wrapper" zaa-esc="closeActiveWindow()">
         <div class="modal">
             <button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="closeActiveWindow()">
@@ -196,6 +266,6 @@
             <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
         </div>
         <div class="modal__background"></div>
-    </div>
+    </div>-->
 
 </div>

@@ -100,16 +100,18 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
                     'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.', $event)',
-                    'icon' => 'delete',
+                    'icon' => 'trash',
                     'label' => '',
+                    'color' => 'danger',
                 ];
             }
             // do we have an edit button
             if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
                     'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
-                    'icon' => 'mode_edit',
+                    'icon' => 'pencil',
                     'label' => '',
+                    'color' => 'success',
                 ];
             }
             

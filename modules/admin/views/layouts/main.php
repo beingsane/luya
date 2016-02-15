@@ -38,38 +38,35 @@ $this->beginPage()
 
     <!-- .navbar -->
     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-        <div class="container-fluid">
-
-            <a class="navbar-brand" href="#">LUYA</a>
-            <ul class="nav navbar-nav">
-                <li class="nav-item" ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
-                    <a class="nav-link" ng-click="click(item);">
-                        <i class="fa fa-{{ item.icon }}"></i> {{ item.alias }} <span ng-if="isActive(item)" class="sr-only">(current)</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="pull-right">
-
-                <button type="button" class="btn btn-primary-outline" ng-click="reload()">
-                    <i class="fa fa-refresh"></i>
-                </button>
-
-                <button type="button" class="btn btn-info-outline" ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
-                    <i class="fa fa-flask"></i>
-                </button>
-
-                <button type="button" class="btn btn-success-outline" ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
-                    {{ notify.length }} <i class="fa fa-users"></i>
-                </button>
-
-                <a class="btn btn-danger-outline" href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">
-                    <i class="fa fa-sign-out"></i>
+        <a class="navbar-brand" href="#">LUYA</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item" ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
+                <a class="nav-link" ng-click="click(item);">
+                    <i class="fa fa-{{ item.icon }}"></i> {{ item.alias }} <span ng-if="isActive(item)" class="sr-only">(current)</span>
                 </a>
+            </li>
+        </ul>
 
-            </div>
+        <div class="pull-right">
+
+            <button type="button" class="btn btn-primary-outline" ng-click="reload()">
+                <i class="fa fa-refresh"></i>
+            </button>
+
+            <button type="button" class="btn btn-info-outline" ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
+                <i class="fa fa-flask"></i>
+            </button>
+
+            <button type="button" class="btn btn-success-outline" ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
+                {{ notify.length }} <i class="fa fa-users"></i>
+            </button>
+
+            <a class="btn btn-danger-outline" href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">
+                <i class="fa fa-sign-out"></i>
+            </a>
 
         </div>
+
     </nav>
     <!-- /navbar -->
 
