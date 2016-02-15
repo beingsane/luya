@@ -1,14 +1,13 @@
 var observeLogin = function(form, url, secureUrl) {
 	$(form).submit(function(e) {
         $('#errorsContainer').hide();
-		$('.submit-spinner').show(); $('.submit-icon').hide();
+        $('.login-animation').addClass('login-animation--is-loading');
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.submit-spinner').hide(); $('.submit-icon').show();
 				var refresh = response['refresh'];
 				var errors = response['errors'];
 				var enterSecureToken = response['enterSecureToken'];
@@ -20,6 +19,7 @@ var observeLogin = function(form, url, secureUrl) {
 				errorHtml = errorHtml + '</ul>';
 				
 				if (errors) {
+                    $('.login-animation').removeClass('login-animation--is-loading');
 					$('#errorsContainer').html(errorHtml);
 					$('#errorsContainer').show();
 				}
@@ -31,7 +31,7 @@ var observeLogin = function(form, url, secureUrl) {
 				}
 				
 				if (refresh) {
-                    $('.login-animation').addClass('login-animation--active');
+                    $('.login-animation').removeClass('login-animation--is-loading').addClass('login-animation--active');
                     setTimeout(function() {
                         location.reload();
                     }, 2000);
@@ -43,22 +43,23 @@ var observeLogin = function(form, url, secureUrl) {
 	
 	$('#secureForm').submit(function(e) {
 		$('#errorsContainer').hide();
-        $('.submit-spinner').show(); $('.submit-icon').hide();
+        $('.login-animation').addClass('login-animation--is-loading');
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: secureUrl,
 			data: $(this).serialize(),
 			success : function(response) {
-                $('.submit-spinner').hide(); $('.submit-icon').show();
 				var refresh = response['refresh'];
 				
 				if (response['errors']) {
+                    $('.login-animation').removeClass('login-animation--is-loading');
 					$('#errorsContainer').html('<ul><li>' + response['errors'] + '</li></ul>');
 					$('#errorsContainer').show();
 				}
 				
 				if (refresh) {
+                    $('.login-animation').removeClass('login-animation--is-loading').addClass('login-animation--active');
                     $('#secureForm').hide();
                     $('#loginForm').hide();
 					$('#success').show();
@@ -70,7 +71,7 @@ var observeLogin = function(form, url, secureUrl) {
 	});
 	
 	$('#abortToken').click(function(e) {
-        $('.submit-spinner').hide(); $('.submit-icon').show();
+        $('.login-animation').removeClass('login-animation--is-loading');
 		$('#errorsContainer').hide();
 		$('#secureForm').hide();
 		$('#loginForm').show();

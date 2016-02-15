@@ -4,19 +4,30 @@
 
 .login-animation__button {
     position: relative;
-    transition: 0.5s ease-in-out border-radius,
+    transition: 0.5s ease-in-out width,
+                0.5s ease-in-out border-radius,
                 0.5s 1s ease transform;
     z-index: 100;
-    outline: 0;
+    outline: 0 !important;
 
-    &:hover, &:focus {
-        outline: 0;
-    }
+    width: 100px;
 
     i, span {
-        transition: 0.25s ease opacity;
+        transition: 0.1s ease opacity;
     }
 
+    .login-animation--is-loading & {
+        background-color: $brand-success;
+        border-color: $brand-success;
+        width: 40px;
+
+        &:hover,
+        &:focus {
+            background-color: $brand-success;
+            border-color: $brand-success;
+            cursor: default;
+        }
+    }
     .login-animation--active & {
         border-radius: 50%;
         height: 52px;
@@ -26,11 +37,20 @@
         i, span {
             opacity: 0;
         }
+    }
+}
 
-        &:hover {
-            background-color: $brand-success;
-            cursor: default;
-        }
+.login-animation--is-loading .login-animation__submit-text,
+.login-animation--is-active .login-animation__submit-text {
+    display: none;
+}
+
+.login-animation__spinner-icon {
+    display: none;
+
+    .login-animation--is-loading &,
+    .login-animation--is-active & {
+        display: block;
     }
 }
 
@@ -42,7 +62,7 @@
     transform: translateX(-50%) translateY(-50%);
     opacity: 0;
     z-index: -1;
-    transition: 2s 0.5s ease opacity;
+    transition: 2s 1s ease opacity;
 
     .login-animation--active & {
         opacity: 1;

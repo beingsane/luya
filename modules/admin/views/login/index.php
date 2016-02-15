@@ -31,11 +31,11 @@
                         </div>
                     </div>
                     <button class="btn btn-lg btn-success pull-right login-animation__button" type="submit">
-                        <span class="submit-icon">
+                        <span class="login-animation__submit-text">
                             <?php echo \admin\Module::t('login_btn_login'); ?>
                             <i class="fa fa-sign-in"></i>
                         </span>
-                        <i class="fa fa-cog fa-spin submit-spinner" style="display: none;"></i>
+                        <i class="fa fa-cog fa-spin login-animation__spinner-icon"></i>
                     </button>
                     <i class="fa fa-check login-animation__success-icon"></i>
                 </form>

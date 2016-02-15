@@ -1,0 +1,13 @@
+/*
+@styleguide
+
+# Angular fixes
+
+Some small fixes to improve usability with angular.
+
+Cursor pointer for elements with `ng-click`.
+*/
+
+*[ng-click] {
+    cursor: pointer;
+}
