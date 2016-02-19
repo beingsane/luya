@@ -10,23 +10,15 @@
     z-index: 100;
     outline: 0 !important;
 
-    width: 100px;
+    height: 52px;
+    width: 150px;
 
     i, span {
         transition: 0.1s ease opacity;
     }
 
     .login-animation--is-loading & {
-        background-color: $brand-success;
-        border-color: $brand-success;
-        width: 40px;
-
-        &:hover,
-        &:focus {
-            background-color: $brand-success;
-            border-color: $brand-success;
-            cursor: default;
-        }
+        height: 52px;
     }
     .login-animation--active & {
         border-radius: 50%;
@@ -36,6 +28,19 @@
 
         i, span {
             opacity: 0;
+        }
+    }
+
+    .login-animation--active &,
+    .login-animation--is-loading & {
+        background-color: $brand-success;
+        border-color: $brand-success;
+
+        &:hover,
+        &:focus {
+            background-color: $brand-success;
+            border-color: $brand-success;
+            cursor: default;
         }
     }
 }
