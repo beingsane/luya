@@ -1,7 +1,7 @@
 Create a new Luya Project on Windows and XAMPP
 ================
 
-With those few steps you can install *LUYA* on your System. To install *LUYA* you have to install [Composer](https://getcomposer.org/doc/00-intro.md#installation-windows) on your Windows System.
+With these few steps you can install *LUYA* on your System. To install *LUYA* you have to install [Composer](https://getcomposer.org/doc/00-intro.md#installation-windows) on your Windows System.
 
 First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. So open your Command Prompt go into your Webserver folder and insert:
 
